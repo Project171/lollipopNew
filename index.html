@@ -1,0 +1,88 @@
+<!doctype html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CS171 - Term Project &amp; Invest Real Estate</title>
+
+    <!-- Load CSS libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+
+</head>
+
+<body class="background-image">
+<!--<body>-->
+
+<div class="container">
+    <div class="row">
+        <!-- Left Column for Bar Chart Heading -->
+        <div class="col-md-8">
+            <h1>Canadian real estate provides stable income</h1>
+            <h2>Quarterly Return</h2>
+
+            <!-- First (Column) Row -->
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <button id="lollipop-heading" type="button" class="btn btn-outline-info">
+                        Brush to select timeseries
+                    </button>
+                </div>
+            </div>
+
+           <!-- Second (Column) Row -->
+            <div class="row">
+                <!-- Bar Chart -->
+                <div id="bar-area"></div>
+            </div>
+        </div>
+
+        <!-- Right Column for Lollipop Chart -->
+        <div class="col-md-4">
+            <h1>Capital Growth</h1>
+            <h2>Annualized Return</h2>
+            <div class="row d-flex justify-content-center">
+                <div class="col-sm-6 btn">
+                    <select id="metricSelect" class="form-select btn btn-outline-info">
+                        <option value="growth">Capital Growth</option>
+                        <option value="income">Income Returns</option>
+                        <option value="total">Total Returns</option>
+                    </select>
+                </div>
+
+                <!-- Lollipop Chart -->
+                <div id="lollipop-area"></div>
+            </div>
+        </div>
+
+        <!-- Row: Commentary update -->
+        <div class="row commentary-container btn btn-outline-info" id="commentary-bar" >
+            <p><strong>INDUSTRIAL remains resilient!!!</strong> <br><strong>Industrial</strong> has experienced very
+                little drawdown in values and return has been quite strong over the last decade. Work-from-home and
+                e-commerce have meant lower return for <strong>Office</strong> and <strong>Retail</strong>. High
+                immigration in Canada, particularly in VECTOM, will keep <strong>Residential</strong> returns robust.
+            </p>
+        </div>
+    </div>
+
+    <!-- Sources -->
+    <a class="source" href="https://www.msci.com/research-and-insights?topic=real_estate"
+       class="text-success" target="_blank">Source: <em>MSCI</em>
+    </a>
+</div>
+
+<!-- Load JS libraries: jQuery, bootstrap, D3 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+
+<!-- d3 -->
+<script src="https://d3js.org/d3.v7.min.js"></script>
+
+<!-- own js files -->
+<script src="js/bar-lollipop.js"></script>
+
+</body>
+</html>
