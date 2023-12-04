@@ -39,68 +39,27 @@ document.addEventListener('DOMContentLoaded', function () {
         selectedMetric = event.target.value;
         console.log("Selected metric:", selectedMetric);
 
-        // Recalculate newValue for each segment based on the selected metric
-        lollipopDataFiltered = recalculateNewValues(lollipopData, selectedMetric);
-
         // Update the lollipop chart whenever the metric changes
-        updateLollipopChart(lollipopDataFiltered);
+        updateOtherChart([]);
 
         // Update the heading text
-        let metricName = getMetricName(selectedMetric);
-
-        // // Update the heading text
-        // let metricName = '';
-        // switch (selectedMetric) {
-        //     case 'income':
-        //         metricName = 'Income Return';
-        //         break;
-        //     case 'growth':
-        //         metricName = 'Capital Growth';
-        //         break;
-        //     case 'total':
-        //         metricName = 'Total Return';
-        //         break;
-        //     default:
-        //         metricName = '';
-        // }
+        let metricName = '';
+        switch (selectedMetric) {
+            case 'income':
+                metricName = 'Income Return';
+                break;
+            case 'growth':
+                metricName = 'Capital Growth';
+                break;
+            case 'total':
+                metricName = 'Total Return';
+                break;
+            default:
+                metricName = '';
+        }
         cumulativeReturnsHeading.textContent = metricName;
     });
 });
-
-function recalculateNewValues(data, metric) {
-    let groupedData = {};
-    data.forEach(d => {
-        if (!groupedData[d.segment]) {
-            groupedData[d.segment] = [];
-        }
-        groupedData[d.segment].push(d);
-    });
-
-    let updatedData = [];
-    for (let segment in groupedData) {
-        let segmentData = groupedData[segment];
-        if (segmentData.length >= 2) {
-            let lastData = segmentData[segmentData.length - 1];
-            let secondLastData = segmentData[segmentData.length - 2];
-            let newValue = Math.pow((lastData[metric] / secondLastData[metric]), 4) - 1;
-            updatedData.push({...lastData, newValue: newValue});
-        }
-    }
-    return updatedData;
-}
-
-function getMetricName(metric) {
-    switch (metric) {
-        case 'income':
-            return 'Income Return';
-        case 'growth':
-            return 'Capital Growth';
-        case 'total':
-            return 'Total Return';
-        default:
-            return '';
-    }
-}
 
 // Global data variables
 let lollipopData = [];
@@ -142,13 +101,8 @@ Promise.all([d3.csv("data/returns.csv"), // bar chart data
 
     // Initialize the charts
     initBarChart(barData);
+    updateOtherChart([]);
 
-    // Ensure lollipopData is ready and call updateOtherChart with no selected range
-    if (lollipopData && lollipopData.length >= 2) {
-        updateOtherChart([]); // Using the last two quarters in lollipopData
-    } else {
-        console.error("Error: Insufficient data in lollipopData.");
-    }
 }).catch(error => {
     console.error("Error loading data:", error);
 });
